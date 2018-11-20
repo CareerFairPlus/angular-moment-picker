@@ -1,3 +1,7 @@
+/******************
+ * NOTE! MODIFIED VERSION OF LIBRARY AVAILABLE VIA NPM TO SUPPORT MOMENT OBJECTS WITH TIMEZONES!!!!!!
+ * Modified lines 160, 561, and 567 to add checks for valid moment objects
+ ********************/
 /*! Angular Moment Picker - v0.10.2 - http://indrimuska.github.io/angular-moment-picker - (c) 2015 Indri Muska - MIT */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -75,7 +79,7 @@
 
 exports.__esModule = true;
 var angular = __webpack_require__(1);
-var moment = __webpack_require__(2);
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 exports.KEYS = { up: 38, down: 40, left: 37, right: 39, escape: 27, enter: 13 };
 exports.isValidMoment = function (value) {
     return moment.isMoment(value) && value.isValid();
@@ -153,7 +157,7 @@ module.exports = angular;
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = moment;
+module.exports = window.moment;
 
 /***/ }),
 /* 3 */
