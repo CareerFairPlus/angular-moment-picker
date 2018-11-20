@@ -157,7 +157,7 @@ module.exports = angular;
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = window.moment;
+module.exports = require('moment');
 
 /***/ }),
 /* 3 */
