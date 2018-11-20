@@ -554,13 +554,13 @@ var Directive = (function () {
                 // properties listeners
                 if ($attrs['ngModel'] != $attrs['momentPicker'])
                     $scope.$watch('value', function (newValue, oldValue) {
-                        if (newValue !== oldValue)
+                        if (newValue !== oldValue && utility_1.isValidMoment(newValue))
                             utility_1.setValue(newValue, $scope, $ctrl, $attrs);
                     });
                 $scope.$watch(function () { return utility_1.momentToValue($ctrl.$modelValue, $scope.format); }, function (newViewValue, oldViewValue) {
                     if (newViewValue == oldViewValue)
                         return;
-                    var newModelValue = utility_1.valueToMoment(newViewValue, $scope);
+                    var newModelValue = utility_1.isValidMoment($ctrl.$modelValue) ? $ctrl.$modelValue : utility_1.valueToMoment(newViewValue, $scope);
                     utility_1.setValue(newModelValue, $scope, $ctrl, $attrs);
                     $scope.limits.checkValue();
                     $scope.view.moment = (newModelValue || moment().locale($scope.locale)).clone();
