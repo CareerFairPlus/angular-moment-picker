@@ -79,7 +79,7 @@
 
 exports.__esModule = true;
 var angular = __webpack_require__(1);
-var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+var moment = __webpack_require__(2);
 exports.KEYS = { up: 38, down: 40, left: 37, right: 39, escape: 27, enter: 13 };
 exports.isValidMoment = function (value) {
     return moment.isMoment(value) && value.isValid();
