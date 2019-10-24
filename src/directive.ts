@@ -16,6 +16,7 @@ export default class Directive implements ng.IDirective {
 	public scope      = {
 		value:       '=?momentPicker',
 		model:       '=?ngModel',
+		ngChange:    '&?',
 		locale:      '@?',
 		format:      '@?',
 		minView:     '@?',

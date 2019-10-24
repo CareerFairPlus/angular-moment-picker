@@ -1,8 +1,8 @@
 /******************
  * NOTE! MODIFIED VERSION OF LIBRARY AVAILABLE VIA NPM TO SUPPORT MOMENT OBJECTS WITH TIMEZONES!!!!!!
  * Modified lines 160 to support proper moment require
- * Modified lines 555 - 560 to add ngChange support
- * Modified lines 567 and 573 to add checks for valid moment objects
+ * Modified lines 235, 556 - 561 to add ngChange support
+ * Modified lines 568 and 574 to add checks for valid moment objects
  ********************/
 /*! Angular Moment Picker - v0.10.2 - http://indrimuska.github.io/angular-moment-picker - (c) 2015 Indri Muska - MIT */
 /******/ (function(modules) { // webpackBootstrap
@@ -232,6 +232,7 @@ var Directive = (function () {
         this.scope = {
             value: '=?momentPicker',
             model: '=?ngModel',
+            ngChange: '&?',
             locale: '@?',
             format: '@?',
             minView: '@?',
