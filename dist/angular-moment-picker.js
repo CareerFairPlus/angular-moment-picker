@@ -1,6 +1,8 @@
 /******************
  * NOTE! MODIFIED VERSION OF LIBRARY AVAILABLE VIA NPM TO SUPPORT MOMENT OBJECTS WITH TIMEZONES!!!!!!
- * Modified lines 160, 561, and 567 to add checks for valid moment objects
+ * Modified lines 160 to support proper moment require
+ * Modified lines 555 - 560 to add ngChange support
+ * Modified lines 567 and 573 to add checks for valid moment objects
  ********************/
 /*! Angular Moment Picker - v0.10.2 - http://indrimuska.github.io/angular-moment-picker - (c) 2015 Indri Muska - MIT */
 /******/ (function(modules) { // webpackBootstrap
@@ -550,8 +552,12 @@ var Directive = (function () {
                 if ($attrs['ngModel']) {
                     $ctrl.$parsers.push(function (viewValue) { return utility_1.updateMoment($ctrl.$modelValue, utility_1.valueToMoment(viewValue, $scope), $scope) || true; });
                     $ctrl.$formatters.push(function (modelValue) { return utility_1.momentToValue(modelValue, $scope.format) || ''; });
-                    $ctrl.$viewChangeListeners.push(function () { if ($attrs['ngModel'] != $attrs['momentPicker'])
-                        $scope.value = $ctrl.$viewValue; });
+                    $ctrl.$viewChangeListeners.push(function () {
+                        if ($attrs['ngModel'] != $attrs['momentPicker'])
+                            $scope.value = $ctrl.$viewValue;
+                        if ($attrs['ngChange'])
+                            $scope.$eval($attrs.ngChange);
+                    });
                     $ctrl.$validators.minDate = function (value) { return $scope.validate || !utility_1.isValidMoment(value) || $scope.limits.isAfterOrEqualMin(value); };
                     $ctrl.$validators.maxDate = function (value) { return $scope.validate || !utility_1.isValidMoment(value) || $scope.limits.isBeforeOrEqualMax(value); };
                 }

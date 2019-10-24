@@ -278,7 +278,7 @@ export default class Directive implements ng.IDirective {
 					let nextView = $scope.views.all.indexOf(view),
 						minView  = $scope.views.all.indexOf($scope.minView),
 						maxView  = $scope.views.all.indexOf($scope.maxView);
-					
+
 					const update = () => {
 						setValue($scope.view.moment, $scope, $ctrl, $attrs);
 						$scope.view.update();
@@ -341,7 +341,13 @@ export default class Directive implements ng.IDirective {
 			if ($attrs['ngModel']) {
 				$ctrl.$parsers.push((viewValue) => updateMoment($ctrl.$modelValue, valueToMoment(viewValue, $scope), $scope) || true);
 				$ctrl.$formatters.push((modelValue) => momentToValue(modelValue, $scope.format) || '');
-				$ctrl.$viewChangeListeners.push(() => { if ($attrs['ngModel'] != $attrs['momentPicker']) $scope.value = $ctrl.$viewValue; });
+				$ctrl.$viewChangeListeners.push(() => {
+					if ($attrs['ngModel'] != $attrs['momentPicker'])
+						$scope.value = $ctrl.$viewValue;
+
+					if ($attrs['ngChange'])
+						$scope.$eval($attrs.ngChange);
+				});
 				$ctrl.$validators.minDate = (value) => $scope.validate || !isValidMoment(value) || $scope.limits.isAfterOrEqualMin(value);
 				$ctrl.$validators.maxDate = (value) => $scope.validate || !isValidMoment(value) || $scope.limits.isBeforeOrEqualMax(value);
 			}
